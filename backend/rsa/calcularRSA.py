@@ -5,9 +5,9 @@ from backend.rsa.procesarRSA import ProcesoRSA
 def calcularDatosBasicosRSA(primerNumero: int, segundoNumero: int) -> dict:
     validacion = validarPYQ(primerNumero, segundoNumero)
 
-    if not validacion["ambos_son_primos"]:
+    if not validacion["ambosSonPrimos"]:
         return {
-            "proceso_correcto": False,
+            "procesoCorrecto": False,
             "mensaje": "No se puede continuar con RSA porque ambos números deben ser primos.",
             "validacion": validacion,
             "n": None,

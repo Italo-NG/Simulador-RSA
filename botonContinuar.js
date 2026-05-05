@@ -20,18 +20,10 @@ async function continuar() {
 
     let resultado = await respuesta.json();
 
-    if (!resultado.proceso_correcto) {
-        salidaDeNumeros.textContent = resultado.mensaje + " " + resultado.validacion.mensaje;
+    if (!resultado.procesoCorrecto) {
+        salidaDeNumeros.textContent = resultado.mensaje + "\n" + resultado.validacion.mensaje;
         return;
     }
 
-    salidaDeNumeros.innerHTML = `
-        <strong>${resultado.mensaje}</strong><br><br>
-        ${resultado.pasos[0]}<br>
-        ${resultado.pasos[1]}<br>
-        ${resultado.pasos[2]}<br>
-        ${resultado.pasos[3]}<br><br>
-        <strong>n:</strong> ${resultado.n}<br>
-        <strong>phi(n):</strong> ${resultado.phi}
-    `;
+    salidaDeNumeros.textContent = resultado.mensaje + "\n\n" + resultado.pasos[0] + "\n" + resultado.pasos[1] + "\n" + resultado.pasos[2] + "\n" + resultado.pasos[3] + "\n\n" + "n: " + resultado.n + "\n" + "phi(n): " + resultado.phi;
 }

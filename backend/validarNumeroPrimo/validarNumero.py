@@ -4,16 +4,18 @@ def validarPYQ(primerNumero: int, segundoNumero: int) -> dict:
     primerNumeroEsPrimo = NumeroPrimo(primerNumero).validarPrimo()
     segundoNumeroEsPrimo = NumeroPrimo(segundoNumero).validarPrimo()
 
-    if primerNumeroEsPrimo and segundoNumeroEsPrimo:
+    ambosSonPrimos = primerNumeroEsPrimo and segundoNumeroEsPrimo
+
+    if ambosSonPrimos:
         mensaje = f"{primerNumero} y {segundoNumero} son numeros primos."
     else:
         mensaje = f"{primerNumero} y {segundoNumero} no cumplen la condicion de ser ambos primos."
 
     return {
-        "primer_numero": primerNumero,
-        "segundo_numero": segundoNumero,
-        "primer_numero_es_primo": primerNumeroEsPrimo,
-        "segundo_numero_es_primo": segundoNumeroEsPrimo,
-        "ambos_son_primos": primerNumeroEsPrimo and segundoNumeroEsPrimo,
+        "primerNumero": primerNumero,
+        "segundoNumero": segundoNumero,
+        "primerNumeroEsPrimo": primerNumeroEsPrimo,
+        "segundoNumeroEsPrimo": segundoNumeroEsPrimo,
+        "ambosSonPrimos": ambosSonPrimos,
         "mensaje": mensaje
     }
