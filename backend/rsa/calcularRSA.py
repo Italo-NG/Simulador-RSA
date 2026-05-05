@@ -8,7 +8,7 @@ def calcularDatosBasicosRSA(primerNumero: int, segundoNumero: int) -> dict:
     if not validacion["ambosSonPrimos"]:
         return {
             "procesoCorrecto": False,
-            "mensaje": "No se puede continuar con RSA porque ambos números deben ser primos.",
+            "mensaje": "No se puede continuar con RSA porque ambos numeros deben ser primos",
             "validacion": validacion,
             "n": None,
             "phi": None,
@@ -21,15 +21,15 @@ def calcularDatosBasicosRSA(primerNumero: int, segundoNumero: int) -> dict:
     phi = procesoRSA.calcularPhi()
 
     pasos = [
-        f"1. Se ingresaron p = {primerNumero} y q = {segundoNumero}.",
-        f"2. Como ambos números son primos, se puede continuar con el algoritmo RSA.",
-        f"3. Se calcula n = p x q = {primerNumero} x {segundoNumero} = {n}.",
-        f"4. Se calcula phi (n) = (p - 1)(q - 1) = ({primerNumero} - 1)({segundoNumero} - 1) = {phi}."
+        f"1. Se ingresaron p = {primerNumero} y q = {segundoNumero}",
+        f"2. Como ambos numeros son primos, se puede continuar con el algoritmo RSA",
+        f"3. Se calcula n = p x q = {primerNumero} x {segundoNumero} = {n}",
+        f"4. Se calcula phi (n) = (p - 1)(q - 1) = ({primerNumero} - 1)({segundoNumero} - 1) = {phi}"
     ]
 
     return {
-        "proceso_correcto": True,
-        "mensaje": "Datos básicos de RSA calculados correctamente.",
+        "procesoCorrecto": True,
+        "mensaje": "Calculado correctamente.",
         "validacion": validacion,
         "n": n,
         "phi": phi,
