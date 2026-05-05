@@ -7,5 +7,18 @@ function continuar() {
     let segundoNumero = parseInt(document.getElementById("campoSegundoNumero").value);
     
     let salidaDeNumeros = document.getElementById("salidaNumeros");
-    salidaDeNumeros.textContent = "Primer número: " + primerNumero + "  Segundo número: " + segundoNumero;
+    
+    let datos = { primerNumero: primerNumero, segundoNumero: segundoNumero };
+
+    let respuesta = await fetch("http://127.0.0.1:8000/api/validarNumerosPrimo", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(datos)
+    });
+
+    let resultado = await respuesta.json();
+
+    salidaDeNumeros.textContent = resultado.mensaje;
 }
