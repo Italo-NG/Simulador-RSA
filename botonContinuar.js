@@ -2,7 +2,7 @@ let botonDeContinuar = document.getElementById("botonDeContinuar");
 
 botonDeContinuar.addEventListener("click", continuar);
 
-function continuar() {
+async function continuar() {
     let primerNumero = parseInt(document.getElementById("campoPrimerNumero").value);
     let segundoNumero = parseInt(document.getElementById("campoSegundoNumero").value);
     
