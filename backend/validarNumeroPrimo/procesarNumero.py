@@ -1,4 +1,4 @@
-class Numero:
+class NumeroPrimo:
     def __init__(self, numero: int):
         self.numero = numero
     
