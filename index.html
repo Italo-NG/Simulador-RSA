@@ -3,16 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Criptografia</title>
 </head>
 <body>
-    <h1>Proyecto Matemática Computacional</h1>
-    <p>Introduce 2 numeros primos</p>
-    <input type="text" placeholder="texto" id="campoDeTexto" name="valorTexto"> <br>
-    <input type="number" placeholder="Primer número primo" id="campoPrimerNumero" name="valorPrimerNumero">
-    <input type="number" placeholder="Segundo número primo" id="campoSegundoNumero" name="valorSegundoNumero">
-    <input type="button" value="Continuar" id="botonDeContinuar">
-    <pre id="salidaNumeros"></pre>
+    <div class="contenedor">
+
+        <h1>Proyecto Matemática Computacional</h1>
+
+        <p>Introduce dos números primos</p>
+
+        <div class="grupo-input">
+
+            <input 
+                type="text" 
+                placeholder="Introduce un texto"
+                id="campoDeTexto"
+                name="valorTexto"
+            >
+
+            <input 
+                type="number"
+                placeholder="Primer número primo"
+                id="campoPrimerNumero"
+                name="valorPrimerNumero"
+            >
+
+            <input 
+                type="number"
+                placeholder="Segundo número primo"
+                id="campoSegundoNumero"
+                name="valorSegundoNumero"
+            >
+
+            <input 
+                type="button"
+                value="Continuar"
+                id="botonDeContinuar"
+            >
+
+        </div>
+
+        <pre id="salidaNumeros"></pre>
+
+    </div>
     <script src="botonContinuar.js"></script>
 </body>
 </html>
