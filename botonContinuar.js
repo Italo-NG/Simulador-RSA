@@ -25,5 +25,19 @@ async function continuar() {
         return;
     }
 
-    salidaDeNumeros.textContent = resultado.mensaje + "\n\n" + resultado.pasos[0] + "\n" + resultado.pasos[1] + "\n" + resultado.pasos[2] + "\n" + resultado.pasos[3] + "\n\n" + "n: " + resultado.n + "\n" + "phi(n): " + resultado.phi;
+    let textoResultado = resultado.mensaje + "\n\n";
+
+    for (let i = 0; i < resultado.pasos.length; i++) {
+        textoResultado += resultado.pasos[i] + "\n";
+    }
+
+    textoResultado += "\n";
+    textoResultado += "n: " + resultado.n + "\n";
+    textoResultado += "phi(n): " + resultado.phi + "\n";
+    textoResultado += "d: " + resultado.d + "\n";
+    textoResultado += "e: " + resultado.e + "\n";
+    textoResultado += "Clave publica: (" + resultado.clavePublica.e + ", " + resultado.clavePublica.n + ")\n";
+    textoResultado += "Clave privada: (" + resultado.clavePrivada.d + ", " + resultado.clavePrivada.n + ")";
+
+    salidaDeNumeros.textContent = textoResultado;
 }
