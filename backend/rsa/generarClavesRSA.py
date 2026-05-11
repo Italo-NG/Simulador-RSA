@@ -21,6 +21,9 @@ class GeneradorClavesRSA:
         return posiblesD
 
     def seleccionarD(self, posiblesD: list) -> int:
+        if len(posiblesD) == 0:
+            return None
+
         return posiblesD[0]
 
     def calcularE(self, d: int) -> int:

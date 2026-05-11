@@ -38,7 +38,7 @@ def calcularDatosBasicosRSA(primerNumero: int, segundoNumero: int) -> dict:
         f"1. Se ingresaron p = {primerNumero} y q = {segundoNumero}",
         f"2. Como ambos numeros son primos, se puede continuar con el algoritmo RSA",
         f"3. Se calcula n = p x q = {primerNumero} x {segundoNumero} = {n}",
-        f"4. Se calcula phi (n) = (p - 1)(q - 1) = ({primerNumero} - 1)({segundoNumero} - 1) = {phi}"
+        f"4. Se calcula phi (n) = (p - 1)(q - 1) = ({primerNumero} - 1)({segundoNumero} - 1) = {phi}",
         f"5. Se buscan posibles valores de d que sean coprimos con phi (n) = {phi}",
         f"6. Posibles valores de d encontrados: {posiblesD}",
         f"7. Se selecciona d = {d}",
