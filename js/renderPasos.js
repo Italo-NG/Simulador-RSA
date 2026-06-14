@@ -1,37 +1,31 @@
-// Render del paso a paso educativo y navegación entre pasos.
-// Los valores (n, φ(n), claves, números cifrados…) vienen del backend; aquí
-// solo se pintan. La única llamada al backend es para recalcular cuando el
-// usuario elige otro valor de d.
 import { estado, guardarResultado } from "./estado.js";
 import { $, esc, texto, resultado } from "./dom.js";
 import { pedirCifradoRSA } from "./api.js";
 import { mostrarError, descifrar } from "./renderResultados.js";
 
-// Estado interno de la navegación: la lista de pasos y el paso actual.
 let pasos = [], idx = 0;
 
-// Define los pasos del recorrido a partir de los datos guardados en `estado`.
 export function construirPasos(){
   pasos = [
-    { // 0 · validación
+    {
       eti: "Paso 1 · Comprobar primos",
       html: () =>
         '<div class="formulota"><b>' + estado.p + '</b> &nbsp;y&nbsp; <b>' + estado.q + '</b> &nbsp; <span class="res">✓ primos</span></div>' +
         '<div class="expli">El backend confirmó que los dos números son primos, así que podemos seguir con RSA. ¡Dale a <b>Siguiente</b>!</div>'
     },
-    { // 1 · n
+    {
       eti: "Paso 2 · Calcular n",
       html: () =>
         '<div class="formulota">n = p × q = ' + estado.p + ' × ' + estado.q + ' = <span class="res">' + estado.n + '</span></div>' +
         '<div class="expli">n es el <b>módulo</b>: forma parte tanto de la clave pública como de la privada.</div>'
     },
-    { // 2 · phi
+    {
       eti: "Paso 3 · Calcular φ(n)",
       html: () =>
         '<div class="formulota">φ(n) = (p−1)(q−1) = (' + (estado.p-1) + ')(' + (estado.q-1) + ') = <span class="res">' + estado.phi + '</span></div>' +
         '<div class="expli">φ(n) es la <b>función de Euler</b>. Con ella el backend encuentra las claves d y e.</div>'
     },
-    { // 3 · elegir d  (INTERACTIVO · cada cambio lo recalcula el backend)
+    {
       eti: "Paso 4 · Elige tú la clave d",
       sigLabel: "Usar este d ▶",
       html: () =>
@@ -47,7 +41,6 @@ export function construirPasos(){
             if(nuevoD === estado.dElegido) return;
             document.querySelectorAll('#chipsD .chip-d').forEach(c => c.classList.remove('sel'));
             ch.classList.add('sel');
-            // el backend recalcula e y vuelve a cifrar con el nuevo d
             try {
               const datos = await pedirCifradoRSA(estado.p, estado.q, estado.msg, nuevoD);
               if(datos.procesoCorrecto){
@@ -62,14 +55,14 @@ export function construirPasos(){
         });
       }
     },
-    { // 4 · calcular e (lo calculó el backend)
+    {
       eti: "Paso 5 · Calcular e",
       html: () =>
         '<div class="expli">El backend busca <b>e</b> tal que <code>(e × d) mod φ(n) = 1</code>. Es el "inverso" de d.</div>' +
         '<div class="formulota" style="margin-top:14px">(<span class="res">' + estado.e + '</span> × ' + estado.dElegido + ') mod ' + estado.phi + ' = 1</div>' +
         '<div class="expli">Con d = ' + estado.dElegido + ' obtenemos <b>e = ' + estado.e + '</b>. ¡Ya tenemos las dos piezas!</div>'
     },
-    { // 5 · claves
+    {
       eti: "Paso 6 · Tus dos claves",
       sigLabel: "Cifrar mensaje ✨",
       sigCls: "btn-cifrar",
@@ -80,7 +73,7 @@ export function construirPasos(){
         '</div>' +
         '<div class="expli">La <b>pública</b> cifra y puedes compartirla con todos. La <b>privada</b> descifra y se mantiene en secreto.</div>'
     },
-    { // 6 · cifrar (animado con los números del backend) + descifrar
+    {
       eti: "Paso 7 · Cifrando el mensaje",
       html: () => {
         if(estado.msg.trim() === ""){
@@ -99,7 +92,7 @@ export function construirPasos(){
       despues: () => {
         if(estado.msg.trim() === "") return;
         const cont = $("cifLive");
-        const numeros = estado.numerosCifrados;   // ya cifrados por el backend
+        const numeros = estado.numerosCifrados;
         let i = 0;
         (function paso(){
           if(i >= numeros.length){
@@ -120,8 +113,6 @@ export function construirPasos(){
   ];
 }
 
-// Muestra el paso i: pinta su contenido, actualiza la barra de progreso y
-// configura los botones Atrás/Siguiente.
 export function irA(i){
   idx = i;
   const def = pasos[i];
@@ -151,8 +142,6 @@ export function irA(i){
   if(def.despues) def.despues();
 }
 
-// Cierra el recorrido y vuelve a la pantalla inicial (título, chat y burbujas).
-// Solo se usa dentro de este módulo (lo llama irA en el último paso).
 function reiniciar(){
   resultado.classList.remove("abierto");
   document.body.classList.remove("modo-resultado");

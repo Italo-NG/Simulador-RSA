@@ -25,7 +25,6 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 
-/* ---------- Título ---------- */
 .cabecera{ text-align:center; margin-bottom:38px; }
 .insignia{
   display:inline-flex; align-items:center; gap:8px;
@@ -60,10 +59,8 @@ h1 .rsa{
   color:var(--tinta-suave);
 }
 
-/* ---------- Contenedor ---------- */
 .escenario{ width:100%; max-width:720px; display:flex; flex-direction:column; align-items:center; }
 
-/* ---------- Barra chat ---------- */
 .chat{
   width:100%;
   background:var(--blanco);
@@ -104,7 +101,6 @@ h1 .rsa{
 }
 .flecha-abajo{ font-size:18px; animation:bote 1.6s ease-in-out infinite; }
 
-/* ---------- Burbujas de primos ---------- */
 .burbujas{ display:flex; gap:26px; width:100%; justify-content:center; flex-wrap:wrap; }
 .burbuja{
   position:relative;
@@ -118,7 +114,7 @@ h1 .rsa{
 }
 .burbuja:nth-child(2){ animation-delay:-2.5s; }
 .burbuja:hover{ transform:translateY(-6px) scale(1.02); }
-.burbuja::after{ /* colita de la burbuja */
+.burbuja::after{
   content:""; position:absolute; bottom:-15px; left:50%; transform:translateX(-50%);
   width:26px;height:26px; background:inherit;
   border-radius:0 0 0 8px;
@@ -163,7 +159,6 @@ h1 .rsa{
 .estado-primo.ok .ficha{ background:#1ca34a; }
 .estado-primo.mal .ficha{ background:var(--rojo); }
 
-/* ---------- Tarjeta resultado ---------- */
 .resultado{
   width:100%; max-width:720px; margin-top:38px;
   display:grid; grid-template-rows:0fr;
@@ -193,7 +188,6 @@ h1 .rsa{
 .res-cabecera h2{ font-size:24px; font-weight:700; }
 .res-cabecera p{ font-size:14px; font-weight:400; color:var(--tinta-suave); }
 
-/* ---------- Stepper guiado ---------- */
 .tope-paso{ display:flex; align-items:center; gap:14px; margin:18px 0 4px; }
 .tope-paso .contador{ font-size:14px;font-weight:600;color:var(--tinta-suave);white-space:nowrap; }
 .barra-prog{ flex:1; height:12px; background:var(--papel); border:2px solid var(--linea); border-radius:999px; overflow:hidden; }
@@ -222,7 +216,6 @@ h1 .rsa{
 .expli b{ color:var(--tinta); font-weight:600; }
 .expli code{ font-family:'Fira Code',monospace; font-weight:600; color:var(--azul-borde); }
 
-/* chips de d (interactivo) */
 .chips-d{ display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
 .chip-d{
   font-family:'Fira Code',monospace; font-size:19px; font-weight:600; cursor:pointer;
@@ -232,7 +225,6 @@ h1 .rsa{
 .chip-d:hover{ transform:translateY(-3px); border-color:var(--azul); }
 .chip-d.sel{ background:var(--azul); border-color:var(--azul-borde); color:#fff; box-shadow:0 4px 0 var(--azul-borde); }
 
-/* navegacion de pasos */
 .nav-pasos{ display:flex; justify-content:space-between; gap:12px; margin-top:28px; }
 .btn{
   font-family:'Fredoka',sans-serif; font-weight:600; font-size:17px; cursor:pointer;
@@ -248,7 +240,6 @@ h1 .rsa{
 .btn-cifrar{ background:var(--rojo); border-color:var(--rojo-borde); color:#fff; box-shadow:0 4px 0 var(--rojo-borde); }
 .btn-cifrar:hover{ transform:translateY(-2px); box-shadow:0 6px 0 var(--rojo-borde); }
 
-/* cifrado animado */
 .cif-live{ display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; min-height:46px; }
 .chip-cif{
   font-family:'Fira Code',monospace; font-size:16px; font-weight:600; color:var(--azul-borde);
@@ -265,7 +256,6 @@ h1 .rsa{
 }
 .btn-descifrar:hover{ transform:translateY(-2px); }
 
-/* burbuja IA (resultado) */
 .burbuja-ia{
   background:#eef3ff; border:3px solid var(--azul);
   border-radius:20px 20px 20px 6px; padding:16px 18px;
@@ -275,7 +265,6 @@ h1 .rsa{
   font-family:'Fira Code',monospace; font-size:18px; font-weight:600; color:var(--tinta); word-break:break-word;
 }
 
-/* claves */
 .claves{ display:flex; gap:14px; flex-wrap:wrap; }
 .clave{ flex:1 1 0; min-width:200px; border-radius:18px; padding:16px 18px; border:3px solid; }
 .clave.publica{ background:#eef3ff; border-color:var(--azul); }
@@ -292,19 +281,16 @@ h1 .rsa{
 }
 .nota b{ color:#6b5300; }
 
-/* ---------- Ola de transición (simulación física en canvas) ---------- */
 #olaCanvas{
   position:fixed; inset:0; width:100vw; height:100vh;
   z-index:9999; display:none; pointer-events:none;
 }
 
-/* ---------- Modo resultado: oculta todo lo demás ---------- */
 body.modo-resultado{ justify-content:flex-start; padding-top:40px; }
 body.modo-resultado .cabecera,
 body.modo-resultado .escenario{ display:none; }
 body.modo-resultado .resultado{ margin-top:0; }
 
-/* ---------- animaciones ---------- */
 @keyframes flota{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
 @keyframes bote{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)} }
 @keyframes pop{ 0%{transform:scale(1)} 40%{transform:scale(1.06)} 100%{transform:scale(1)} }

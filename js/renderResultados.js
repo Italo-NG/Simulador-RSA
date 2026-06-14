@@ -1,16 +1,11 @@
-// Render de la tarjeta de resultado: errores, cabecera del recorrido y el
-// mensaje descifrado. Aquí NO se hace fetch ni se calcula RSA: solo se pinta
-// en la página lo que el backend ya devolvió.
 import { estado } from "./estado.js";
 import { tarjeta, resultado, $, esc } from "./dom.js";
 
-// Abre/anima la carta de resultado (privado del módulo).
 function abrirCarta(){
   resultado.classList.remove("abierto"); void resultado.offsetWidth;
   resultado.classList.add("abierto");
 }
 
-// Muestra una tarjeta de error con título y detalle.
 export function mostrarError(titulo, detalle){
   tarjeta.className = "tarjeta error";
   tarjeta.innerHTML =
@@ -19,8 +14,6 @@ export function mostrarError(titulo, detalle){
   abrirCarta();
 }
 
-// Arma la carta del recorrido guiado (cabecera + barra de progreso + navegación).
-// El contenido de cada paso lo rellena renderPasos.js.
 export function armarCarta(){
   tarjeta.className = "tarjeta";
   tarjeta.innerHTML =
@@ -36,7 +29,6 @@ export function armarCarta(){
   abrirCarta();
 }
 
-// El texto descifrado ya viene del backend (clave privada en Python).
 export function descifrar(){
   $("cajaDesc").innerHTML =
     '<div class="burbuja-ia" style="margin-top:16px">' +

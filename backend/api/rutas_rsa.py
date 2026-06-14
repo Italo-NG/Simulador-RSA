@@ -5,8 +5,6 @@ from backend.validarNumeroPrimo.validarNumero import validarPYQ
 from backend.rsa.calcularRSA import calcularDatosBasicosRSA
 from backend.rsa.cifrarMensajeRSA import cifrarMensajeRSA
 
-# Router que agrupa los endpoints de la API RSA.
-# Se registra en main.py con app.include_router(...).
 router = APIRouter()
 
 

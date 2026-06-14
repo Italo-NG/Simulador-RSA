@@ -38,8 +38,6 @@ class GeneradorClavesRSA:
         posiblesD = self.obtenerPosiblesD()
         d = self.seleccionarD(posiblesD)
 
-        # Si no hay ningun d posible (phi muy pequeno), no se puede calcular e.
-        # Se devuelve una respuesta controlada para no romper el backend.
         if d is None:
             return {
                 "posiblesD": posiblesD,

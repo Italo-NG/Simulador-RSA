@@ -2,11 +2,8 @@ from backend.rsa.calcularRSA import calcularDatosBasicosRSA
 
 
 def cifrarMensajeRSA(primerNumero: int, segundoNumero: int, mensaje: str, dElegido: int = None) -> dict:
-    # Reutiliza el calculo de claves y la validacion RSA comun.
     datos = calcularDatosBasicosRSA(primerNumero, segundoNumero, dElegido)
 
-    # Si los numeros no son validos, no son primos o no hay un d valido,
-    # el calculo no continua.
     if not datos["procesoCorrecto"]:
         return {
             "procesoCorrecto": False,
@@ -22,13 +19,10 @@ def cifrarMensajeRSA(primerNumero: int, segundoNumero: int, mensaje: str, dElegi
     e = datos["e"]
     d = datos["d"]
 
-    # Cifrar: cada caracter -> c = (codigo del caracter ^ e) mod n
     numerosCifrados = [pow(ord(caracter), e, n) for caracter in mensaje]
 
-    # Descifrar: cada numero -> caracter = (numero ^ d) mod n
     textoDescifrado = "".join(chr(pow(numero, d, n)) for numero in numerosCifrados)
 
-    # Aviso si algun caracter vale mas que n (se pierde al descifrar)
     advertencia = None
     if any(ord(caracter) >= n for caracter in mensaje):
         advertencia = (

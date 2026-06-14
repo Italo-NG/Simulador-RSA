@@ -7,5 +7,4 @@ app = FastAPI()
 
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"],)
 
-# Toda la API RSA vive en backend/api/rutas_rsa.py
 app.include_router(routerRSA)
