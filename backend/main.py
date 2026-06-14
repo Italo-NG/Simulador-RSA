@@ -1,9 +1,12 @@
+from typing import Optional
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from backend.validarNumeroPrimo.validarNumero import validarPYQ
 from backend.rsa.calcularRSA import calcularDatosBasicosRSA
+from backend.rsa.cifrarMensajeRSA import cifrarMensajeRSA
 
 app = FastAPI()
 
@@ -20,3 +23,13 @@ def validarNumerosPrimos(datos: NumerosRequest):
 @app.post("/api/calcularDatosRSA")
 def calcularDatosRSA(datos: NumerosRequest):
     return calcularDatosBasicosRSA(datos.primerNumero, datos.segundoNumero)
+
+class MensajeRequest(BaseModel):
+    primerNumero: int
+    segundoNumero: int
+    mensaje: str
+    d: Optional[int] = None
+
+@app.post("/api/cifrarMensajeRSA")
+def cifrarMensaje(datos: MensajeRequest):
+    return cifrarMensajeRSA(datos.primerNumero, datos.segundoNumero, datos.mensaje, datos.d)

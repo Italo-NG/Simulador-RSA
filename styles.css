@@ -8,6 +8,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{height:100%;}
+html{ overflow-x:hidden; }
 body{
   font-family:'Fredoka',system-ui,sans-serif;
   color:var(--tinta);
@@ -192,37 +193,91 @@ h1 .rsa{
 .res-cabecera h2{ font-size:24px; font-weight:700; }
 .res-cabecera p{ font-size:14px; font-weight:400; color:var(--tinta-suave); }
 
-.seccion-titulo{
-  font-size:13px; font-weight:600; letter-spacing:.6px; text-transform:uppercase;
-  color:var(--tinta-suave); margin:24px 0 12px;
-}
+/* ---------- Stepper guiado ---------- */
+.tope-paso{ display:flex; align-items:center; gap:14px; margin:18px 0 4px; }
+.tope-paso .contador{ font-size:14px;font-weight:600;color:var(--tinta-suave);white-space:nowrap; }
+.barra-prog{ flex:1; height:12px; background:var(--papel); border:2px solid var(--linea); border-radius:999px; overflow:hidden; }
+.barra-prog i{ display:block;height:100%;width:0;background:var(--azul);border-radius:999px;transition:width .45s cubic-bezier(.22,1,.36,1); }
 
-/* mensaje cifrado tipo chat IA */
+#pasoPanel{ min-height:150px; padding:8px 0 4px; }
+.paso-panel{ animation:entraPaso .42s cubic-bezier(.22,1,.36,1); }
+@keyframes entraPaso{ from{opacity:0;transform:translateY(16px) scale(.98)} to{opacity:1;transform:none} }
+
+.paso-eti{
+  display:inline-block; font-size:13px; font-weight:600; letter-spacing:.5px; text-transform:uppercase;
+  color:var(--azul-borde); background:#eef3ff; border:2px solid var(--azul);
+  padding:4px 12px; border-radius:999px; margin-bottom:18px;
+}
+.formulota{
+  font-family:'Fira Code',monospace; font-size:clamp(20px,3.6vw,32px); font-weight:600;
+  color:var(--tinta); line-height:1.5; word-break:break-word;
+}
+.formulota b{ color:var(--azul-borde); }
+.formulota sup{ font-size:.6em; }
+.formulota .res{
+  background:var(--amarillo); border:3px solid var(--amarillo-borde); border-radius:10px;
+  padding:0 10px; color:#5a4600; display:inline-block;
+}
+.expli{ margin-top:14px; font-size:16px; font-weight:400; color:var(--tinta-suave); line-height:1.5; }
+.expli b{ color:var(--tinta); font-weight:600; }
+.expli code{ font-family:'Fira Code',monospace; font-weight:600; color:var(--azul-borde); }
+
+/* chips de d (interactivo) */
+.chips-d{ display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
+.chip-d{
+  font-family:'Fira Code',monospace; font-size:19px; font-weight:600; cursor:pointer;
+  background:#fff; border:3px solid var(--linea); border-radius:14px; padding:8px 18px; color:var(--tinta);
+  transition:transform .12s, border-color .15s, background .15s, box-shadow .12s;
+}
+.chip-d:hover{ transform:translateY(-3px); border-color:var(--azul); }
+.chip-d.sel{ background:var(--azul); border-color:var(--azul-borde); color:#fff; box-shadow:0 4px 0 var(--azul-borde); }
+
+/* navegacion de pasos */
+.nav-pasos{ display:flex; justify-content:space-between; gap:12px; margin-top:28px; }
+.btn{
+  font-family:'Fredoka',sans-serif; font-weight:600; font-size:17px; cursor:pointer;
+  border-radius:16px; padding:13px 24px; border:3px solid;
+  transition:transform .12s, box-shadow .12s; display:inline-flex; align-items:center; gap:8px;
+}
+.btn:active{ transform:translateY(2px) !important; }
+.btn-atras{ background:#fff; border-color:var(--linea); color:var(--tinta-suave); box-shadow:0 4px 0 var(--linea); }
+.btn-atras:hover:not(:disabled){ border-color:var(--tinta-suave); transform:translateY(-2px); }
+.btn-atras:disabled{ opacity:.4; cursor:not-allowed; }
+.btn-sig{ background:var(--azul); border-color:var(--azul-borde); color:#fff; box-shadow:0 4px 0 var(--azul-borde); }
+.btn-sig:hover{ transform:translateY(-2px); box-shadow:0 6px 0 var(--azul-borde); }
+.btn-cifrar{ background:var(--rojo); border-color:var(--rojo-borde); color:#fff; box-shadow:0 4px 0 var(--rojo-borde); }
+.btn-cifrar:hover{ transform:translateY(-2px); box-shadow:0 6px 0 var(--rojo-borde); }
+
+/* cifrado animado */
+.cif-live{ display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; min-height:46px; }
+.chip-cif{
+  font-family:'Fira Code',monospace; font-size:16px; font-weight:600; color:var(--azul-borde);
+  background:#fff; border:2px solid var(--azul); border-radius:10px; padding:5px 11px;
+}
+.entra-cif{ animation:popCif .32s ease; }
+@keyframes popCif{ 0%{opacity:0;transform:scale(.4) translateY(-10px) rotate(-8deg)} 100%{opacity:1;transform:none} }
+
+.btn-descifrar{
+  margin-top:18px; display:none; align-items:center; gap:8px;
+  background:#fff; border:3px solid var(--rojo); color:var(--rojo-borde);
+  border-radius:14px; padding:11px 20px; font-family:'Fredoka'; font-weight:600; font-size:16px;
+  cursor:pointer; box-shadow:0 4px 0 var(--rojo-sombra); transition:transform .12s;
+}
+.btn-descifrar:hover{ transform:translateY(-2px); }
+
+/* burbuja IA (resultado) */
 .burbuja-ia{
-  background:linear-gradient(0deg,#eef3ff,#eef3ff); /* sólido */
-  background:#eef3ff;
-  border:3px solid var(--azul);
-  border-radius:20px 20px 20px 6px;
-  padding:16px 18px; margin-bottom:6px;
+  background:#eef3ff; border:3px solid var(--azul);
+  border-radius:20px 20px 20px 6px; padding:16px 18px;
 }
 .burbuja-ia .mini{ font-size:12px;font-weight:600;color:var(--azul-borde);margin-bottom:8px;letter-spacing:.4px; }
-.cifrado{
-  font-family:'Fira Code',monospace; font-size:16px; font-weight:600; color:var(--azul-borde);
-  word-break:break-word; line-height:1.7;
+.burbuja-ia .texto-claro{
+  font-family:'Fira Code',monospace; font-size:18px; font-weight:600; color:var(--tinta); word-break:break-word;
 }
-.cifrado span{ background:#fff;border:2px solid var(--azul);border-radius:8px;padding:1px 7px;margin:2px;display:inline-block; }
-.descifrado{
-  font-family:'Fira Code',monospace; font-size:14px; color:var(--tinta-suave);
-  margin-top:12px; word-break:break-word;
-}
-.descifrado b{ color:var(--tinta); }
 
-/* chips de claves */
+/* claves */
 .claves{ display:flex; gap:14px; flex-wrap:wrap; }
-.clave{
-  flex:1 1 0; min-width:200px;
-  border-radius:18px; padding:16px 18px; border:3px solid;
-}
+.clave{ flex:1 1 0; min-width:200px; border-radius:18px; padding:16px 18px; border:3px solid; }
 .clave.publica{ background:#eef3ff; border-color:var(--azul); }
 .clave.privada{ background:#fff3f3; border-color:var(--rojo); }
 .clave .nombre{ font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px; }
@@ -230,41 +285,28 @@ h1 .rsa{
 .clave.privada .nombre{ color:var(--rojo-borde); }
 .clave .par{ font-family:'Fira Code',monospace; font-size:22px; font-weight:600; color:var(--tinta); }
 
-/* valores n, phi, d, e */
-.valores{ display:flex; gap:10px; flex-wrap:wrap; }
-.valor{
-  background:var(--papel); border:2px solid var(--linea); border-radius:14px;
-  padding:10px 16px; min-width:84px; text-align:center;
-}
-.valor .k{ font-family:'Fira Code',monospace; font-size:13px; color:var(--tinta-suave); font-weight:600; }
-.valor .n{ font-family:'Fira Code',monospace; font-size:22px; font-weight:600; }
-
-/* pasos */
-.pasos{ list-style:none; display:flex; flex-direction:column; gap:8px; }
-.pasos li{
-  background:var(--papel); border:2px solid var(--linea); border-radius:14px;
-  padding:11px 16px 11px 14px; font-size:15px; font-weight:400; color:var(--tinta);
-  display:flex; gap:12px; align-items:flex-start;
-  opacity:0; transform:translateX(-10px);
-}
-.resultado.abierto .pasos li{ animation:entra .4s ease forwards; }
-.pasos li .num{
-  flex:none; width:24px;height:24px;border-radius:50%; background:var(--azul); color:#fff;
-  font-size:13px; font-weight:700; display:grid;place-items:center; margin-top:1px;
-}
-.pasos li code{ font-family:'Fira Code',monospace; font-weight:600; color:var(--azul-borde); }
-
 .nota{
   margin-top:18px; background:#fffbe9; border:2px solid var(--amarillo-borde);
   border-radius:14px; padding:12px 16px; font-size:14px; color:#7a5e00; font-weight:400;
-  display:flex; gap:10px; align-items:flex-start;
+  display:flex; gap:10px; align-items:flex-start; line-height:1.45;
 }
 .nota b{ color:#6b5300; }
+
+/* ---------- Ola de transición (simulación física en canvas) ---------- */
+#olaCanvas{
+  position:fixed; inset:0; width:100vw; height:100vh;
+  z-index:9999; display:none; pointer-events:none;
+}
+
+/* ---------- Modo resultado: oculta todo lo demás ---------- */
+body.modo-resultado{ justify-content:flex-start; padding-top:40px; }
+body.modo-resultado .cabecera,
+body.modo-resultado .escenario{ display:none; }
+body.modo-resultado .resultado{ margin-top:0; }
 
 /* ---------- animaciones ---------- */
 @keyframes flota{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
 @keyframes bote{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)} }
-@keyframes entra{ to{opacity:1;transform:none} }
 @keyframes pop{ 0%{transform:scale(1)} 40%{transform:scale(1.06)} 100%{transform:scale(1)} }
 .pop{ animation:pop .35s ease; }
 @keyframes sacude{ 0%,100%{transform:translateX(0)} 20%{transform:translateX(-7px)} 40%{transform:translateX(7px)} 60%{transform:translateX(-5px)} 80%{transform:translateX(5px)} }
@@ -276,4 +318,5 @@ h1 .rsa{
 @media (max-width:560px){
   .burbujas{ gap:34px; }
   .burbuja{ max-width:100%; }
+  .nav-pasos .btn{ padding:12px 16px; font-size:15px; }
 }

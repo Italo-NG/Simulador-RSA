@@ -2,7 +2,7 @@ from backend.validarNumeroPrimo.validarNumero import validarPYQ
 from backend.rsa.procesarRSA import ProcesoRSA
 from backend.rsa.generarClavesRSA import GeneradorClavesRSA
 
-def calcularDatosBasicosRSA(primerNumero: int, segundoNumero: int) -> dict:
+def calcularDatosBasicosRSA(primerNumero: int, segundoNumero: int, dElegido: int = None) -> dict:
     validacion = validarPYQ(primerNumero, segundoNumero)
 
     if not validacion["ambosSonPrimos"]:
@@ -29,10 +29,19 @@ def calcularDatosBasicosRSA(primerNumero: int, segundoNumero: int) -> dict:
     datosClaves = generadorClaves.generarClaves()
 
     posiblesD = datosClaves["posiblesD"]
-    d = datosClaves["d"]
-    e = datosClaves["e"]
-    clavePublica = datosClaves["clavePublica"]
-    clavePrivada = datosClaves["clavePrivada"]
+
+    # Por defecto se usa el primer d. Si el usuario eligio un d valido
+    # (coprimo con phi), se usa ese y se recalcula e para esa eleccion.
+    if dElegido is not None and dElegido in posiblesD:
+        d = dElegido
+        e = generadorClaves.calcularE(d)
+        clavePublica = {"e": e, "n": n}
+        clavePrivada = {"d": d, "n": n}
+    else:
+        d = datosClaves["d"]
+        e = datosClaves["e"]
+        clavePublica = datosClaves["clavePublica"]
+        clavePrivada = datosClaves["clavePrivada"]
 
     pasos = [
         f"1. Se ingresaron p = {primerNumero} y q = {segundoNumero}",
