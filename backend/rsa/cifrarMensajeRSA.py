@@ -2,20 +2,7 @@ from backend.rsa.calcularRSA import calcularDatosBasicosRSA
 
 
 def cifrarMensajeRSA(primerNumero: int, segundoNumero: int, mensaje: str, dElegido: int = None) -> dict:
-    # En RSA los dos primos deben ser distintos. Se valida primero, antes de
-    # calcular nada, para evitar errores con casos pequenos (por ejemplo p = q = 2).
-    if primerNumero == segundoNumero:
-        return {
-            "procesoCorrecto": False,
-            "mensaje": "En RSA los dos primos deben ser distintos entre si.",
-            "datosRSA": None,
-            "textoOriginal": mensaje,
-            "numerosCifrados": [],
-            "textoDescifrado": "",
-            "advertencia": None
-        }
-
-    # Reutiliza el calculo de claves que ya existe (n, phi, d, e, claves, pasos)
+    # Reutiliza el calculo de claves y la validacion RSA comun.
     datos = calcularDatosBasicosRSA(primerNumero, segundoNumero, dElegido)
 
     # Si los numeros no son validos, no son primos o no hay un d valido,

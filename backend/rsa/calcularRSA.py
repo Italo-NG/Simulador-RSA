@@ -1,14 +1,14 @@
-from backend.validarNumeroPrimo.validarNumero import validarPYQ
+from backend.rsa.validarRSA import validarNumerosRSA
 from backend.rsa.procesarRSA import ProcesoRSA
 from backend.rsa.generarClavesRSA import GeneradorClavesRSA
 
 def calcularDatosBasicosRSA(primerNumero: int, segundoNumero: int, dElegido: int = None) -> dict:
-    validacion = validarPYQ(primerNumero, segundoNumero)
+    validacion = validarNumerosRSA(primerNumero, segundoNumero)
 
-    if not validacion["ambosSonPrimos"]:
+    if not validacion["rsaValido"]:
         return {
             "procesoCorrecto": False,
-            "mensaje": "No se puede continuar con RSA porque ambos numeros deben ser primos",
+            "mensaje": validacion["mensajeRSA"],
             "validacion": validacion,
             "n": None,
             "phi": None,
