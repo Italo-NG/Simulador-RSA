@@ -9,3 +9,6 @@ export function esPrimo(n){
 export function camposCompletos(valorP, valorQ){
   return valorP.trim() !== "" && valorQ.trim() !== "";
 }
+export function primosDemasiadoPequenos(p, q){
+  return esPrimo(p) && esPrimo(q) && p !== q && p * q <= 126;
+}

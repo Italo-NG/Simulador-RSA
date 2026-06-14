@@ -10,7 +10,7 @@ export function construirPasos(){
     {
       eti: "Paso 1 · Comprobar primos",
       html: () =>
-        '<div class="formulota"><b>' + estado.p + '</b> &nbsp;y&nbsp; <b>' + estado.q + '</b> &nbsp; <span class="res">✓ primos</span></div>' +
+        '<div class="formulota"><b>' + estado.p + '</b> &nbsp;y&nbsp; <b>' + estado.q + '</b> &nbsp; <span class="res">primos</span></div>' +
         '<div class="expli">El backend confirmó que los dos números son primos, así que podemos seguir con RSA. ¡Dale a <b>Siguiente</b>!</div>'
     },
     {
@@ -27,9 +27,9 @@ export function construirPasos(){
     },
     {
       eti: "Paso 4 · Elige tú la clave d",
-      sigLabel: "Usar este d ▶",
+      sigLabel: "Usar este d",
       html: () =>
-        '<div class="expli">Tú decides el valor de <b>d</b>. Sirve cualquiera que sea <b>coprimo con φ(n) = ' + estado.phi + '</b> (es decir, mcd = 1). 👇 Toca uno:</div>' +
+        '<div class="expli">Tú decides el valor de <b>d</b>. Sirve cualquiera que sea <b>coprimo con φ(n) = ' + estado.phi + '</b> (es decir, mcd = 1). Toca uno:</div>' +
         '<div class="chips-d" id="chipsD">' +
           estado.posiblesD.slice(0, 18).map(d => '<button class="chip-d' + (d===estado.dElegido?' sel':'') + '" data-d="' + d + '">' + d + '</button>').join('') +
         '</div>' +
@@ -64,12 +64,12 @@ export function construirPasos(){
     },
     {
       eti: "Paso 6 · Tus dos claves",
-      sigLabel: "Cifrar mensaje ✨",
+      sigLabel: "Cifrar mensaje",
       sigCls: "btn-cifrar",
       html: () =>
         '<div class="claves">' +
-          '<div class="clave publica"><div class="nombre">🔓 Clave pública (e, n)</div><div class="par">(' + estado.clavePublica.e + ', ' + estado.clavePublica.n + ')</div></div>' +
-          '<div class="clave privada"><div class="nombre">🔑 Clave privada (d, n)</div><div class="par">(' + estado.clavePrivada.d + ', ' + estado.clavePrivada.n + ')</div></div>' +
+          '<div class="clave publica"><div class="nombre">Clave pública (e, n)</div><div class="par">(' + estado.clavePublica.e + ', ' + estado.clavePublica.n + ')</div></div>' +
+          '<div class="clave privada"><div class="nombre">Clave privada (d, n)</div><div class="par">(' + estado.clavePrivada.d + ', ' + estado.clavePrivada.n + ')</div></div>' +
         '</div>' +
         '<div class="expli">La <b>pública</b> cifra y puedes compartirla con todos. La <b>privada</b> descifra y se mantiene en secreto.</div>'
     },
@@ -77,15 +77,15 @@ export function construirPasos(){
       eti: "Paso 7 · Cifrando el mensaje",
       html: () => {
         if(estado.msg.trim() === ""){
-          return '<div class="nota"><span>💡</span><span>No escribiste ningún mensaje arriba. Pulsa <b>↺ Nuevo mensaje</b>, escribe algo en el chat y vuelve a empezar para verlo cifrarse letra por letra.</span></div>';
+          return '<div class="nota"><span></span><span>No escribiste ningún mensaje arriba. Pulsa <b>Nuevo mensaje</b>, escribe algo en el chat y vuelve a empezar para verlo cifrarse letra por letra.</span></div>';
         }
         let h =
           '<div class="expli">Cada letra de «<b>' + esc(estado.msg) + '</b>» se convierte en un número con <code>c = m<sup>' + estado.e + '</sup> mod ' + estado.n + '</code>:</div>' +
           '<div class="cif-live" id="cifLive"></div>' +
-          '<button class="btn-descifrar" id="btnDescifrar">🔓 Descifrar para comprobar</button>' +
+          '<button class="btn-descifrar" id="btnDescifrar">Descifrar para comprobar</button>' +
           '<div id="cajaDesc"></div>';
         if(estado.advertencia){
-          h += '<div class="nota"><span>⚠️</span><span>' + esc(estado.advertencia) + '</span></div>';
+          h += '<div class="nota"><span></span><span>' + esc(estado.advertencia) + '</span></div>';
         }
         return h;
       },
@@ -131,11 +131,11 @@ export function irA(i){
 
   if(i === pasos.length - 1){
     sig.className = "btn btn-sig";
-    sig.innerHTML = "↺ Nuevo mensaje";
+    sig.innerHTML = "Nuevo mensaje";
     sig.onclick = reiniciar;
   } else {
     sig.className = "btn " + (def.sigCls || "btn-sig");
-    sig.innerHTML = def.sigLabel || "Siguiente ▶";
+    sig.innerHTML = def.sigLabel || "Siguiente";
     sig.onclick = () => irA(i+1);
   }
 

@@ -26,18 +26,6 @@ body{
 }
 
 .cabecera{ text-align:center; margin-bottom:38px; }
-.insignia{
-  display:inline-flex; align-items:center; gap:8px;
-  background:var(--amarillo);
-  border:3px solid var(--amarillo-borde);
-  color:#6b5300;
-  font-weight:600; font-size:15px; letter-spacing:.3px;
-  padding:6px 16px; border-radius:999px;
-  box-shadow:0 4px 0 var(--amarillo-borde);
-  margin-bottom:18px;
-  transform:rotate(-2deg);
-}
-.insignia .punto{ width:9px;height:9px;border-radius:50%;background:#6b5300; }
 h1{
   font-size:clamp(40px,7vw,72px);
   font-weight:700;

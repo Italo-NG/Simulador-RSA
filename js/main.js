@@ -1,5 +1,5 @@
 import { texto, numeroP, numeroQ, enviar, estadoP, estadoQ, burbujaP, burbujaQ, leerEntero } from "./dom.js";
-import { esPrimo, camposCompletos } from "./validaciones.js";
+import { esPrimo, camposCompletos, primosDemasiadoPequenos } from "./validaciones.js";
 import { reproducirOla, sacudir, efectoPop } from "./animaciones.js";
 import { pedirCifradoRSA } from "./api.js";
 import { guardarResultado } from "./estado.js";
@@ -12,11 +12,11 @@ function actualizarPrimo(input, estadoEl, burbuja){
   const n = parseInt(v, 10);
   if(esPrimo(n)){
     estadoEl.className = "estado-primo ver ok";
-    estadoEl.innerHTML = '<span class="ficha">✓</span> ¡es primo!';
+    estadoEl.innerHTML = '<span class="ficha"></span> ¡es primo!';
     efectoPop(burbuja);
   } else {
     estadoEl.className = "estado-primo ver mal";
-    estadoEl.innerHTML = '<span class="ficha">✕</span> no es primo';
+    estadoEl.innerHTML = '<span class="ficha"></span> no es primo';
   }
 }
 
@@ -38,6 +38,10 @@ async function empezar(){
   if(!camposCompletos(numeroP.value, numeroQ.value)){
     sacudir(burbujaP); sacudir(burbujaQ);
     return mostrarError("Faltan números", "Escribe los dos números primos en las burbujas para continuar.");
+  }
+  if(primosDemasiadoPequenos(p, q)){
+    return mostrarError("Usa números primos más grandes",
+      "Para cifrar texto, usa números primos más grandes. Te recomendamos 11 y 17 o mayores.");
   }
 
   let datos;

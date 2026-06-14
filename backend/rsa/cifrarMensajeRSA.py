@@ -19,16 +19,22 @@ def cifrarMensajeRSA(primerNumero: int, segundoNumero: int, mensaje: str, dElegi
     e = datos["e"]
     d = datos["d"]
 
+    if mensaje and max(ord(caracter) for caracter in mensaje) >= n:
+        return {
+            "procesoCorrecto": False,
+            "mensaje": "Estos numeros son muy pequenos para cifrar este texto. Usa numeros primos mas grandes, por ejemplo 11 y 17.",
+            "datosRSA": datos,
+            "textoOriginal": mensaje,
+            "numerosCifrados": [],
+            "textoDescifrado": "",
+            "advertencia": None
+        }
+
     numerosCifrados = [pow(ord(caracter), e, n) for caracter in mensaje]
 
     textoDescifrado = "".join(chr(pow(numero, d, n)) for numero in numerosCifrados)
 
     advertencia = None
-    if any(ord(caracter) >= n for caracter in mensaje):
-        advertencia = (
-            f"Algunos caracteres valen mas que n = {n}, asi que al descifrar pueden "
-            f"no coincidir. Usa primos mas grandes para textos con acentos o emojis."
-        )
 
     datosRSA = {
         "n": n,

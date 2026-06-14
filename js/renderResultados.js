@@ -17,14 +17,14 @@ export function mostrarError(titulo, detalle){
 export function armarCarta(){
   tarjeta.className = "tarjeta";
   tarjeta.innerHTML =
-    '<div class="res-cabecera ok"><div class="icono">✓</div>' +
+    '<div class="res-cabecera ok"><div class="icono"></div>' +
     '<div><h2>¡Vamos paso a paso!</h2><p>' + estado.p + ' y ' + estado.q + ' son primos · sigue el proceso RSA</p></div></div>' +
     '<div class="tope-paso"><span class="contador" id="progCont"></span>' +
     '<div class="barra-prog"><i id="progFill"></i></div></div>' +
     '<div id="pasoPanel"></div>' +
     '<div class="nav-pasos">' +
-      '<button class="btn btn-atras" id="btnAtras">◀ Atrás</button>' +
-      '<button class="btn btn-sig" id="btnSig">Siguiente ▶</button>' +
+      '<button class="btn btn-atras" id="btnAtras">Atrás</button>' +
+      '<button class="btn btn-sig" id="btnSig">Siguiente</button>' +
     '</div>';
   abrirCarta();
 }
