@@ -15,6 +15,17 @@ def cifrarMensajeRSA(primerNumero: int, segundoNumero: int, mensaje: str, dElegi
             "advertencia": None
         }
 
+    if mensaje.strip() == "":
+        return {
+            "procesoCorrecto": False,
+            "mensaje": "Escribe un mensaje para cifrar.",
+            "datosRSA": datos,
+            "textoOriginal": mensaje,
+            "numerosCifrados": [],
+            "textoDescifrado": "",
+            "advertencia": None
+        }
+
     n = datos["n"]
     e = datos["e"]
     d = datos["d"]

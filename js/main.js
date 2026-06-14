@@ -39,6 +39,9 @@ async function empezar(){
     sacudir(burbujaP); sacudir(burbujaQ);
     return mostrarError("Faltan números", "Escribe los dos números primos en las burbujas para continuar.");
   }
+  if(texto.value.trim() === ""){
+    return mostrarError("Falta mensaje", "Escribe un mensaje para cifrar.");
+  }
   if(primosDemasiadoPequenos(p, q)){
     return mostrarError("Usa números primos más grandes",
       "Para cifrar texto, usa números primos más grandes. Te recomendamos 11 y 17 o mayores.");
