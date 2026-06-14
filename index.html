@@ -1,52 +1,60 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Criptografia</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador RSA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Fira+Code:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="contenedor">
 
-        <h1>Proyecto Matemática Computacional</h1>
+  <div class="cabecera">
+    <div class="insignia"><span class="punto"></span> Matemática Computacional</div>
+    <h1>Simulador <span class="rsa">RSA</span></h1>
+    <p class="subtitulo">Escribe un mensaje, dale dos números primos y míralo cifrarse</p>
+  </div>
 
-        <p>Introduce dos números primos</p>
+  <div class="escenario">
 
-        <div class="grupo-input">
-
-            <input 
-                type="text" 
-                placeholder="Introduce un texto"
-                id="campoDeTexto"
-                name="valorTexto"
-            >
-
-            <input 
-                type="number"
-                placeholder="Primer número primo"
-                id="campoPrimerNumero"
-                name="valorPrimerNumero"
-            >
-
-            <input 
-                type="number"
-                placeholder="Segundo número primo"
-                id="campoSegundoNumero"
-                name="valorSegundoNumero"
-            >
-
-            <input 
-                type="button"
-                value="Continuar"
-                id="botonDeContinuar"
-            >
-
-        </div>
-
-        <pre id="salidaNumeros"></pre>
-
+    <!-- Barra tipo chat IA -->
+    <div class="chat" id="chat">
+      <div class="avatar">🔒</div>
+      <input id="texto" type="text" placeholder="Escribe el mensaje que quieres cifrar…" autocomplete="off">
+      <button class="enviar" id="enviar" title="Cifrar mensaje" aria-label="Cifrar">
+        <svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
+      </button>
     </div>
-    <script src="botonContinuar.js"></script>
+
+    <div class="pista-chat">
+      <span class="flecha-abajo">↓</span> Ahora elige tus dos números primos
+    </div>
+
+    <!-- Burbujas de primos -->
+    <div class="burbujas">
+      <div class="burbuja amarilla" id="burbujaP">
+        <span class="etiqueta-burbuja">Primer primo <span class="v">p</span></span>
+        <input type="number" id="numeroP" placeholder="11" min="2" inputmode="numeric">
+        <div class="estado-primo" id="estadoP"></div>
+      </div>
+      <div class="burbuja roja" id="burbujaQ">
+        <span class="etiqueta-burbuja">Segundo primo <span class="v">q</span></span>
+        <input type="number" id="numeroQ" placeholder="17" min="2" inputmode="numeric">
+        <div class="estado-primo" id="estadoQ"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Resultado -->
+  <div class="resultado" id="resultado">
+    <div class="resultado-inner">
+      <div class="tarjeta" id="tarjeta"></div>
+    </div>
+  </div>
+
+  <script src="simuladorRSA.js"></script>
 </body>
 </html>
