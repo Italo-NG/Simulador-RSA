@@ -1,0 +1,41 @@
+.escenario{ width:100%; max-width:720px; display:flex; flex-direction:column; align-items:center; }
+
+.chat{
+  width:100%;
+  background:#ffffff;
+  border:4px solid #2563eb;
+  border-radius:30px;
+  box-shadow:0 8px 0 #a9c6ff;
+  padding:10px 10px 10px 24px;
+  display:flex; align-items:center; gap:14px;
+  transition:box-shadow .18s ease, transform .18s ease;
+}
+.chat:focus-within{ box-shadow:0 10px 0 #3b82f6; transform:translateY(-2px); }
+.chat .avatar{
+  flex:none; width:42px;height:42px;border-radius:50%;
+  background:#3b82f6; border:3px solid #2563eb;
+  display:grid;place-items:center; color:#fff; font-weight:700; font-size:18px;
+  box-shadow:inset 0 -3px 0 rgba(0,0,0,.15);
+}
+#texto{
+  flex:1; border:none; outline:none; background:transparent;
+  font-family:inherit; font-size:20px; font-weight:500; color:#23283a;
+  padding:14px 0;
+}
+#texto::placeholder{ color:#aab; font-weight:400; }
+.enviar{
+  flex:none; width:54px;height:54px;border-radius:50%;
+  background:#ff5c5c; border:3px solid #e23b3b;
+  cursor:pointer; display:grid;place-items:center;
+  box-shadow:0 4px 0 #e23b3b;
+  transition:transform .12s ease, box-shadow .12s ease, background .2s;
+}
+.enviar:hover{ transform:translateY(-2px) rotate(8deg); box-shadow:0 6px 0 #e23b3b; }
+.enviar:active{ transform:translateY(2px); box-shadow:0 1px 0 #e23b3b; }
+.enviar svg{ width:24px;height:24px;stroke:#fff;stroke-width:3.4;fill:none;stroke-linecap:round;stroke-linejoin:round; }
+
+.pista-chat{
+  margin:14px 0 30px; font-size:15px; color:#5a6076; font-weight:400;
+  display:flex; align-items:center; gap:8px;
+}
+.flecha-abajo{ font-size:18px; animation:bote 1.6s ease-in-out infinite; }
