@@ -22,7 +22,6 @@
   width:40px;height:40px;border-radius:13px;border:3px solid;
   display:grid;place-items:center;font-size:22px;font-weight:700;flex:none;
 }
-.res-cabecera.ok .icono{ background:#dffbe7;border-color:#1ca34a;color:#1ca34a; }
 .res-cabecera.bad .icono{ background:#ffe2e2;border-color:#e23b3b;color:#e23b3b; }
 .res-cabecera h2{ font-size:24px; font-weight:700; }
 .res-cabecera p{ font-size:14px; font-weight:400; color:#5a6076; }

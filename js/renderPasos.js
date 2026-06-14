@@ -8,25 +8,25 @@ let pasos = [], idx = 0;
 export function construirPasos(){
   pasos = [
     {
-      eti: "Paso 1 · Comprobar primos",
+      eti: "Paso 1 Comprobar primos",
       html: () =>
         '<div class="formulota"><b>' + estado.p + '</b> &nbsp;y&nbsp; <b>' + estado.q + '</b> &nbsp; <span class="res">primos</span></div>' +
         '<div class="expli">El backend confirmó que los dos números son primos, así que podemos seguir con RSA. ¡Dale a <b>Siguiente</b>!</div>'
     },
     {
-      eti: "Paso 2 · Calcular n",
+      eti: "Paso 2 Calcular n",
       html: () =>
         '<div class="formulota">n = p × q = ' + estado.p + ' × ' + estado.q + ' = <span class="res">' + estado.n + '</span></div>' +
         '<div class="expli">n es el <b>módulo</b>: forma parte tanto de la clave pública como de la privada.</div>'
     },
     {
-      eti: "Paso 3 · Calcular φ(n)",
+      eti: "Paso 3 Calcular φ(n)",
       html: () =>
         '<div class="formulota">φ(n) = (p−1)(q−1) = (' + (estado.p-1) + ')(' + (estado.q-1) + ') = <span class="res">' + estado.phi + '</span></div>' +
         '<div class="expli">φ(n) es la <b>función de Euler</b>. Con ella el backend encuentra las claves d y e.</div>'
     },
     {
-      eti: "Paso 4 · Elige tú la clave d",
+      eti: "Paso 4 Elige tú la clave d",
       sigLabel: "Usar este d",
       html: () =>
         '<div class="expli">Tú decides el valor de <b>d</b>. Sirve cualquiera que sea <b>coprimo con φ(n) = ' + estado.phi + '</b> (es decir, mcd = 1). Toca uno:</div>' +
@@ -56,14 +56,14 @@ export function construirPasos(){
       }
     },
     {
-      eti: "Paso 5 · Calcular e",
+      eti: "Paso 5 Calcular e",
       html: () =>
         '<div class="expli">El backend busca <b>e</b> tal que <code>(e × d) mod φ(n) = 1</code>. Es el "inverso" de d.</div>' +
         '<div class="formulota" style="margin-top:14px">(<span class="res">' + estado.e + '</span> × ' + estado.dElegido + ') mod ' + estado.phi + ' = 1</div>' +
         '<div class="expli">Con d = ' + estado.dElegido + ' obtenemos <b>e = ' + estado.e + '</b>. ¡Ya tenemos las dos piezas!</div>'
     },
     {
-      eti: "Paso 6 · Tus dos claves",
+      eti: "Paso 6 Tus dos claves",
       sigLabel: "Cifrar mensaje",
       sigCls: "btn-cifrar",
       html: () =>
@@ -74,7 +74,7 @@ export function construirPasos(){
         '<div class="expli">La <b>pública</b> cifra y puedes compartirla con todos. La <b>privada</b> descifra y se mantiene en secreto.</div>'
     },
     {
-      eti: "Paso 7 · Cifrando el mensaje",
+      eti: "Paso 7 Cifrando el mensaje",
       html: () => {
         if(estado.msg.trim() === ""){
           return '<div class="nota"><span></span><span>No escribiste ningún mensaje arriba. Pulsa <b>Nuevo mensaje</b>, escribe algo en el chat y vuelve a empezar para verlo cifrarse letra por letra.</span></div>';
