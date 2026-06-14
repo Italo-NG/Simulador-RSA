@@ -30,6 +30,23 @@ def calcularDatosBasicosRSA(primerNumero: int, segundoNumero: int, dElegido: int
 
     posiblesD = datosClaves["posiblesD"]
 
+    # Con primos muy pequenos (por ejemplo 2 y 3) phi queda tan chico que no
+    # existe ningun d coprimo con phi. En ese caso no se puede continuar con RSA.
+    if datosClaves["d"] is None:
+        return {
+            "procesoCorrecto": False,
+            "mensaje": "Estos primos son demasiado pequenos para RSA: no existe un valor de d valido. Usa primos mas grandes.",
+            "validacion": validacion,
+            "n": n,
+            "phi": phi,
+            "posiblesD": posiblesD,
+            "d": None,
+            "e": None,
+            "clavePublica": None,
+            "clavePrivada": None,
+            "pasos": []
+        }
+
     # Por defecto se usa el primer d. Si el usuario eligio un d valido
     # (coprimo con phi), se usa ese y se recalcula e para esa eleccion.
     if dElegido is not None and dElegido in posiblesD:
