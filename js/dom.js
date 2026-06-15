@@ -4,6 +4,7 @@ export const texto     = $("texto");
 export const numeroP   = $("numeroP");
 export const numeroQ   = $("numeroQ");
 export const enviar    = $("enviar");
+export const cargandoRSA = $("cargandoRSA");
 export const resultado = $("resultado");
 export const tarjeta   = $("tarjeta");
 export const burbujaP  = $("burbujaP");

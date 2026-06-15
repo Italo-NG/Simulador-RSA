@@ -39,6 +39,7 @@ export function irA(i){
 function reiniciar(){
   resultado.classList.remove("abierto");
   document.body.classList.remove("modo-resultado");
+  window.dispatchEvent(new Event("rsa:reiniciar-formulario"));
   window.scrollTo({ top:0, behavior:"smooth" });
   setTimeout(()=>texto.focus(), 400);
 }

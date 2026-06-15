@@ -1,10 +1,25 @@
-import { texto, numeroP, numeroQ, enviar, estadoP, estadoQ, burbujaP, burbujaQ, leerEntero } from "./dom.js";
+import { texto, numeroP, numeroQ, enviar, cargandoRSA, estadoP, estadoQ, burbujaP, burbujaQ, leerEntero } from "./dom.js";
 import { esPrimo, camposCompletos, primosDemasiadoPequenos } from "./validaciones.js";
 import { reproducirOla, sacudir, efectoPop } from "./animaciones.js";
 import { pedirCifradoRSA } from "./api.js";
 import { guardarResultado } from "./estado.js";
 import { mostrarError, armarCarta } from "./renderResultados.js";
 import { construirPasos, irA } from "./renderPasos.js";
+
+let procesando = false;
+
+function marcarProcesando(activo){
+  procesando = activo;
+  enviar.disabled = activo;
+  enviar.classList.toggle("procesando", activo);
+  if(cargandoRSA){
+    cargandoRSA.classList.toggle("ver", activo);
+    cargandoRSA.setAttribute("aria-hidden", String(!activo));
+  }
+  enviar.setAttribute("aria-busy", String(activo));
+  enviar.title = activo ? "Cifrando..." : "Empezar a cifrar";
+  enviar.setAttribute("aria-label", activo ? "Cifrando" : "Cifrar");
+}
 
 function actualizarPrimo(input, estadoEl, burbuja){
   const v = input.value.trim();
@@ -31,6 +46,8 @@ function sacudirSegunValidacion(datosRSA){
 }
 
 async function empezar(){
+  if(procesando) return;
+
   const p = leerEntero(numeroP);
   const q = leerEntero(numeroQ);
   const msg = texto.value;
@@ -47,15 +64,19 @@ async function empezar(){
       "Para cifrar texto, usa números primos más grandes. Te recomendamos 11 y 17 o mayores.");
   }
 
+  marcarProcesando(true);
+
   let datos;
   try {
     datos = await pedirCifradoRSA(p, q, msg, null);
   } catch(err){
+    marcarProcesando(false);
     return mostrarError("No se pudo conectar con el backend",
       "Ejecuta primero:  uvicorn backend.main:app --reload");
   }
 
   if(!datos.procesoCorrecto){
+    marcarProcesando(false);
     sacudirSegunValidacion(datos.datosRSA);
     return mostrarError("No se puede continuar con RSA", datos.mensaje);
   }
@@ -63,6 +84,7 @@ async function empezar(){
   guardarResultado(p, q, msg, datos);
   const arrancar = () => {
     document.body.classList.add("modo-resultado");
+    marcarProcesando(false);
     construirPasos();
     armarCarta();
     irA(0);
@@ -70,6 +92,8 @@ async function empezar(){
   };
   reproducirOla(arrancar);
 }
+
+window.addEventListener("rsa:reiniciar-formulario", () => marcarProcesando(false));
 
 numeroP.addEventListener("input", () => actualizarPrimo(numeroP, estadoP, burbujaP));
 numeroQ.addEventListener("input", () => actualizarPrimo(numeroQ, estadoQ, burbujaQ));
