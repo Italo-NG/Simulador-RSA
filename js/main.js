@@ -71,8 +71,8 @@ async function empezar(){
     datos = await pedirCifradoRSA(p, q, msg, null);
   } catch(err){
     marcarProcesando(false);
-    return mostrarError("No se pudo conectar con el backend",
-      "Ejecuta primero:  uvicorn backend.main:app --reload");
+    return mostrarError("No se pudo conectar con el servidor",
+      "Revisa tu conexión e inténtalo de nuevo en un momento.");
   }
 
   if(!datos.procesoCorrecto){

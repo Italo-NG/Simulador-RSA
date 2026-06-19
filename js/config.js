@@ -4,3 +4,4 @@ const API_BASE_URL =
     : "https://simulador-rsa.onrender.com";
 
 export const API_CIFRAR_RSA = `${API_BASE_URL}/api/cifrarMensajeRSA`;
+export const API_DESCIFRAR_RSA = `${API_BASE_URL}/api/descifrarMensajeRSA`;

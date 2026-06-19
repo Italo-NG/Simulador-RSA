@@ -1,9 +1,10 @@
 from fastapi import APIRouter
 
-from backend.modelos.solicitudes import NumerosRequest, MensajeRequest
+from backend.modelos.solicitudes import NumerosRequest, MensajeRequest, DescifradoRequest
 from backend.validarNumeroPrimo.validarNumero import validarPYQ
 from backend.rsa.calcularRSA import calcularDatosBasicosRSA
 from backend.rsa.cifrarMensajeRSA import cifrarMensajeRSA
+from backend.rsa.descifrarMensajeRSA import descifrarMensajeRSA
 
 router = APIRouter()
 
@@ -21,3 +22,8 @@ def calcularDatosRSA(datos: NumerosRequest):
 @router.post("/api/cifrarMensajeRSA")
 def cifrarMensaje(datos: MensajeRequest):
     return cifrarMensajeRSA(datos.primerNumero, datos.segundoNumero, datos.mensaje, datos.d)
+
+
+@router.post("/api/descifrarMensajeRSA")
+def descifrarMensaje(datos: DescifradoRequest):
+    return descifrarMensajeRSA(datos.numerosCifrados, datos.d, datos.n)

@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import List, Optional
 
 from pydantic import BaseModel
 
@@ -13,3 +13,9 @@ class MensajeRequest(BaseModel):
     segundoNumero: int
     mensaje: str
     d: Optional[int] = None
+
+
+class DescifradoRequest(BaseModel):
+    numerosCifrados: List[int]
+    d: int
+    n: int

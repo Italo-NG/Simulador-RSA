@@ -8,7 +8,10 @@ export const estado = {
   clavePrivada: null,
   numerosCifrados: [],
   textoDescifrado: "",
-  advertencia: null
+  advertencia: null,
+  numerosColocados: [],
+  textoRecuperado: "",
+  codigosRecuperados: []
 };
 
 export function guardarResultado(p, q, msg, datos){
@@ -26,4 +29,7 @@ export function guardarResultado(p, q, msg, datos){
   estado.numerosCifrados = datos.numerosCifrados;
   estado.textoDescifrado = datos.textoDescifrado;
   estado.advertencia = datos.advertencia;
+  estado.numerosColocados = [];
+  estado.textoRecuperado = "";
+  estado.codigosRecuperados = [];
 }

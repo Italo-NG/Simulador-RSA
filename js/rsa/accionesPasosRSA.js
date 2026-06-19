@@ -1,7 +1,7 @@
 import { estado, guardarResultado } from "../estado.js";
 import { $ } from "../dom.js";
 import { pedirCifradoRSA } from "../api.js";
-import { mostrarError, descifrar } from "../renderResultados.js";
+import { mostrarError } from "../renderResultados.js";
 
 export function activarSeleccionD(){
   document.querySelectorAll('#chipsD .chip-d').forEach(ch => {
@@ -17,8 +17,8 @@ export function activarSeleccionD(){
           $("dVal").textContent = estado.dElegido;
         }
       } catch(err){
-        mostrarError("No se pudo conectar con el backend",
-          "Ejecuta primero:  uvicorn backend.main:app --reload");
+        mostrarError("No se pudo conectar con el servidor",
+          "Revisa tu conexión e inténtalo de nuevo en un momento.");
       }
     };
   });
@@ -30,13 +30,7 @@ export function animarCifrado(){
   const numeros = estado.numerosCifrados;
   let i = 0;
   (function paso(){
-    if(i >= numeros.length){
-      const b = $("btnDescifrar");
-      if(!b) return;
-      b.style.display = "inline-flex";
-      b.onclick = descifrar;
-      return;
-    }
+    if(i >= numeros.length){ mostrarResumenCifrado(); return; }
     const sp = document.createElement("span");
     sp.className = "chip-cif entra-cif";
     sp.textContent = numeros[i];
@@ -44,4 +38,15 @@ export function animarCifrado(){
     i++;
     setTimeout(paso, 240);
   })();
+}
+
+function mostrarResumenCifrado(){
+  const cont = $("cifResumen");
+  if(!cont) return;
+  cont.innerHTML =
+    '<div class="burbuja-ia" style="margin-top:18px">' +
+      '<div class="mini">Tu mensaje encriptado es</div>' +
+      '<div class="texto-claro">' + estado.numerosCifrados.join("") + '</div>' +
+    '</div>' +
+    '<div class="sello-ok">¡Mensaje encriptado! Felicidades.</div>';
 }
